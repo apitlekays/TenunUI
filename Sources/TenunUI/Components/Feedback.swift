@@ -144,7 +144,7 @@ public struct TenunTabs<Value: Hashable>: View {
                         .frame(maxWidth: .infinity, minHeight: TenunButtonSize.regular.height(.current) - 6)
                         .background {
                             if chosen {
-                                tab.fill(Color(scheme == .dark ? palette.input.withAlpha(palette.input.alpha * 0.3) : palette.background))
+                                tab.fill(Color(TenunTabsPaint.chosenFill(palette, scheme.tenunAppearance)))
                                     .shadow(color: .black.opacity(0.05), radius: 1, y: 1)
                             }
                         }

@@ -82,6 +82,14 @@ public enum TenunButtonSize: String, CaseIterable, Sendable {
     }
 }
 
+/// The chosen tab's fill. shadcn: `data-[state=active]:bg-background`, and in the dark
+/// `bg-input/30`. `card` stands in for `background` for the same reason as the outline button.
+public enum TenunTabsPaint {
+    public static func chosenFill(_ p: TenunTheme.Palette, _ appearance: TenunTheme.Appearance) -> RGB {
+        appearance == .dark ? p.input.withAlpha(p.input.alpha * 0.3) : p.card
+    }
+}
+
 /// shadcn's badge variants; each paints like the button of the same name, except the outline
 /// badge, which has no fill (`border-border text-foreground`).
 public enum TenunBadgeVariant: String, CaseIterable, Sendable {

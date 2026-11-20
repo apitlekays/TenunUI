@@ -38,6 +38,15 @@ struct ButtonVariantTests {
         #expect(TenunButtonVariant.outline.paint(light) == TenunPaint(fill: light.background, label: light.foreground, edge: light.border))
     }
 
+    /// shadcn raises the chosen tab on `background`; on a grey page that is the track's grey.
+    @Test func theChosenTabStandsOffItsTrack() {
+        var p = light
+        p.background = p.muted
+        #expect(TenunTabsPaint.chosenFill(p, .light) == p.card)
+        #expect(TenunTabsPaint.chosenFill(p, .light) != p.muted)
+        #expect(TenunTabsPaint.chosenFill(dark, .dark) == dark.input.withAlpha(dark.input.alpha * 0.3))
+    }
+
     /// A brand colour can be a good fill and still too dim as text on the page, so a link uses
     /// `primaryText`, which is `primary` unless a theme sets it.
     @Test func aLinkUsesPrimaryText() {
