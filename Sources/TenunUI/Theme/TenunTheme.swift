@@ -12,6 +12,9 @@ public struct TenunTheme: Equatable, Sendable {
         public var cardForeground: RGB
         public var primary: RGB
         public var primaryForeground: RGB
+        /// `primary` used as text on the page (a link). TenunUI's addition: a brand colour that
+        /// makes a good fill can be too dim as text, so a theme may set a lighter or darker one.
+        public var primaryText: RGB
         public var secondary: RGB
         public var secondaryForeground: RGB
         public var muted: RGB
@@ -32,7 +35,7 @@ public struct TenunTheme: Equatable, Sendable {
 
         public init(
             background: RGB, foreground: RGB, card: RGB, cardForeground: RGB,
-            primary: RGB, primaryForeground: RGB, secondary: RGB, secondaryForeground: RGB,
+            primary: RGB, primaryForeground: RGB, primaryText: RGB? = nil, secondary: RGB, secondaryForeground: RGB,
             muted: RGB, mutedForeground: RGB, accent: RGB, accentForeground: RGB,
             destructive: RGB, destructiveFill: RGB, destructiveForeground: RGB,
             border: RGB, input: RGB, ring: RGB
@@ -43,6 +46,7 @@ public struct TenunTheme: Equatable, Sendable {
             self.cardForeground = cardForeground
             self.primary = primary
             self.primaryForeground = primaryForeground
+            self.primaryText = primaryText ?? primary
             self.secondary = secondary
             self.secondaryForeground = secondaryForeground
             self.muted = muted

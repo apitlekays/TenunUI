@@ -36,7 +36,7 @@ public enum TenunButtonVariant: String, CaseIterable, Sendable {
         case .destructive: TenunPaint(fill: p.destructiveFill, label: p.destructiveForeground, edge: nil)
         case .secondary: TenunPaint(fill: p.secondary, label: p.secondaryForeground, edge: nil)
         case .ghost: TenunPaint(fill: nil, label: p.foreground, edge: nil)
-        case .link: TenunPaint(fill: nil, label: p.primary, edge: nil)
+        case .link: TenunPaint(fill: nil, label: p.primaryText, edge: nil)
         case .outline:
             // shadcn: `border bg-background`, and in the dark `dark:border-input dark:bg-input/30`.
             appearance == .dark

@@ -14,7 +14,7 @@ struct ButtonVariantTests {
         #expect(TenunButtonVariant.secondary.paint(p) == TenunPaint(fill: p.secondary, label: p.secondaryForeground, edge: nil))
         #expect(TenunButtonVariant.outline.paint(p) == TenunPaint(fill: p.background, label: p.foreground, edge: p.border))
         #expect(TenunButtonVariant.ghost.paint(p) == TenunPaint(fill: nil, label: p.foreground, edge: nil))
-        #expect(TenunButtonVariant.link.paint(p) == TenunPaint(fill: nil, label: p.primary, edge: nil))
+        #expect(TenunButtonVariant.link.paint(p) == TenunPaint(fill: nil, label: p.primaryText, edge: nil))
     }
 
     /// shadcn: `dark:border-input dark:bg-input/30` on the outline button.
@@ -26,6 +26,15 @@ struct ButtonVariantTests {
         opaque.input = RGB(red: 0.4, green: 0.4, blue: 0.4)
         #expect(TenunButtonVariant.outline.paint(opaque, .dark).edge == opaque.input)
         #expect(paint.fill == dark.input.withAlpha(dark.input.alpha * 0.3))
+    }
+
+    /// A brand colour can be a good fill and still too dim as text on the page, so a link uses
+    /// `primaryText`, which is `primary` unless a theme sets it.
+    @Test func aLinkUsesPrimaryText() {
+        #expect(light.primaryText == light.primary)
+        var p = dark
+        p.primaryText = RGB(red: 0.9, green: 0.54, blue: 0.58)
+        #expect(TenunButtonVariant.link.paint(p, .dark).label == p.primaryText)
     }
 
     @Test func aBadgePaintsLikeTheButtonOfTheSameName() {
