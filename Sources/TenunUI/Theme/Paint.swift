@@ -39,9 +39,11 @@ public enum TenunButtonVariant: String, CaseIterable, Sendable {
         case .link: TenunPaint(fill: nil, label: p.primaryText, edge: nil)
         case .outline:
             // shadcn: `border bg-background`, and in the dark `dark:border-input dark:bg-input/30`.
+            // `card` here, not `background`: the same white on shadcn's neutral, and still the
+            // card's colour on a theme with a grey page behind white cards.
             appearance == .dark
                 ? TenunPaint(fill: p.input.withAlpha(p.input.alpha * 0.3), label: p.foreground, edge: p.input)
-                : TenunPaint(fill: p.background, label: p.foreground, edge: p.border)
+                : TenunPaint(fill: p.card, label: p.foreground, edge: p.border)
         }
     }
 }

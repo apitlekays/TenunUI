@@ -12,7 +12,7 @@ struct ButtonVariantTests {
         #expect(TenunButtonVariant.primary.paint(p) == TenunPaint(fill: p.primary, label: p.primaryForeground, edge: nil))
         #expect(TenunButtonVariant.destructive.paint(p) == TenunPaint(fill: p.destructiveFill, label: p.destructiveForeground, edge: nil))
         #expect(TenunButtonVariant.secondary.paint(p) == TenunPaint(fill: p.secondary, label: p.secondaryForeground, edge: nil))
-        #expect(TenunButtonVariant.outline.paint(p) == TenunPaint(fill: p.background, label: p.foreground, edge: p.border))
+        #expect(TenunButtonVariant.outline.paint(p) == TenunPaint(fill: p.card, label: p.foreground, edge: p.border))
         #expect(TenunButtonVariant.ghost.paint(p) == TenunPaint(fill: nil, label: p.foreground, edge: nil))
         #expect(TenunButtonVariant.link.paint(p) == TenunPaint(fill: nil, label: p.primaryText, edge: nil))
     }
@@ -26,6 +26,16 @@ struct ButtonVariantTests {
         opaque.input = RGB(red: 0.4, green: 0.4, blue: 0.4)
         #expect(TenunButtonVariant.outline.paint(opaque, .dark).edge == opaque.input)
         #expect(paint.fill == dark.input.withAlpha(dark.input.alpha * 0.3))
+    }
+
+    /// shadcn fills an outline button with `background`, which is the card's white too. A theme
+    /// with a grey page behind white cards would get grey outline buttons on its cards, so the
+    /// fill is `card`: the same on shadcn's neutral, right on such a theme.
+    @Test func anOutlineButtonOnACardLooksLikeTheCard() {
+        var p = light
+        p.background = RGB(red: 0.96, green: 0.96, blue: 0.96)
+        #expect(TenunButtonVariant.outline.paint(p).fill == p.card)
+        #expect(TenunButtonVariant.outline.paint(light) == TenunPaint(fill: light.background, label: light.foreground, edge: light.border))
     }
 
     /// A brand colour can be a good fill and still too dim as text on the page, so a link uses
