@@ -47,6 +47,15 @@ struct ButtonVariantTests {
         #expect(TenunTabsPaint.chosenFill(dark, .dark) == dark.input.withAlpha(dark.input.alpha * 0.3))
     }
 
+    /// TenunUI's addition: an outline button in the destructive colour, for an app whose
+    /// primary is too close to shadcn's filled red to tell apart.
+    @Test func aDestructiveOutlineIsAnOutlineInRed() {
+        let outline = TenunButtonVariant.outline.paint(light)
+        #expect(TenunButtonVariant.destructiveOutline.paint(light) == TenunPaint(fill: outline.fill, label: light.destructive, edge: light.destructive))
+        let darkOutline = TenunButtonVariant.outline.paint(dark, .dark)
+        #expect(TenunButtonVariant.destructiveOutline.paint(dark, .dark) == TenunPaint(fill: darkOutline.fill, label: dark.destructive, edge: dark.destructive))
+    }
+
     /// A brand colour can be a good fill and still too dim as text on the page, so a link uses
     /// `primaryText`, which is `primary` unless a theme sets it.
     @Test func aLinkUsesPrimaryText() {

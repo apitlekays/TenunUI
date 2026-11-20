@@ -26,9 +26,11 @@ public enum TenunPlatform: Sendable {
     }
 }
 
-/// shadcn's button variants (`default` is `primary` here: `default` is a Swift keyword).
+/// shadcn's button variants (`default` is `primary` here: `default` is a Swift keyword), plus
+/// `destructiveOutline`, TenunUI's own: the outline button in the destructive colour, for a
+/// theme whose primary is too close to a filled red to tell apart.
 public enum TenunButtonVariant: String, CaseIterable, Sendable {
-    case primary, destructive, outline, secondary, ghost, link
+    case primary, destructive, destructiveOutline, outline, secondary, ghost, link
 
     public func paint(_ p: TenunTheme.Palette, _ appearance: TenunTheme.Appearance = .light) -> TenunPaint {
         switch self {
@@ -37,6 +39,8 @@ public enum TenunButtonVariant: String, CaseIterable, Sendable {
         case .secondary: TenunPaint(fill: p.secondary, label: p.secondaryForeground, edge: nil)
         case .ghost: TenunPaint(fill: nil, label: p.foreground, edge: nil)
         case .link: TenunPaint(fill: nil, label: p.primaryText, edge: nil)
+        case .destructiveOutline:
+            TenunPaint(fill: TenunButtonVariant.outline.paint(p, appearance).fill, label: p.destructive, edge: p.destructive)
         case .outline:
             // shadcn: `border bg-background`, and in the dark `dark:border-input dark:bg-input/30`.
             // `card` here, not `background`: the same white on shadcn's neutral, and still the

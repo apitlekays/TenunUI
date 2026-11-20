@@ -26,7 +26,7 @@ TenunCard {
 
 | shadcn | TenunUI |
 |---|---|
-| Button (default, destructive, outline, secondary, ghost, link; xs, sm, default, lg, icon) | `.buttonStyle(.tenun(_:size:))` (`default` is `.primary`) |
+| Button (default, destructive, outline, secondary, ghost, link; xs, sm, default, lg, icon) | `.buttonStyle(.tenun(_:size:))` (`default` is `.primary`; plus `.destructiveOutline`) |
 | Card, CardHeader | `TenunCard`, `TenunCardHeader`, `.tenunCardSurface()` |
 | Badge | `TenunBadge` |
 | Input, Label | `.tenunField()`, `TenunFieldLabel` |
@@ -69,6 +69,9 @@ edge against 3:1 (WCAG 2 1.4.3 and 1.4.11), in both appearances.
 - **No endless pulse on Skeleton.** A loop that never stops pulls the eye from the content and
   keeps UI tests from ever seeing the screen settle.
 - **Switch** is the platform switch, tinted, so it stays a switch to assistive technology.
+- **`.destructiveOutline`**, one button variant shadcn does not have: the outline button with
+  its label and edge in `destructive`. For a theme whose primary is a red or maroon that a
+  filled destructive button would be confused with.
 - **`primaryText`**, one token shadcn does not have: `primary` used as text (the link button).
   It defaults to `primary`. A brand colour can make a good button fill yet be too dim as text on
   the page, so a theme can set the two apart.
